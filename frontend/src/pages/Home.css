@@ -1,0 +1,19 @@
+/* Home.css */
+.heading {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .feature-item {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
