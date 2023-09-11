@@ -13,10 +13,12 @@ const errorController = {
   sendError: async (req, res) => {
     try {
       const errorDetails = req.body; // Assuming the error details are in the request body
+      console.log(errorDetails)
       await processError(errorDetails); // Process the error
       res.json({ message: 'Error reported and processed successfully' });
     } catch (error) {
-      res.status(500).json({ error: 'Error processing error ' + error.message });
+      console.error('Error processing error:', error);
+      res.status(500).json({ error: 'Error processing error: ' + error.message });    
     }
   },
 

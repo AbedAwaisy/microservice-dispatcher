@@ -5,7 +5,7 @@ const router = express.Router();
 const ErrorController = require('../controllers/errorController');
 
 // Define routes
-router.post('reportError', ErrorController.sendError);
+router.post('/reportError', ErrorController.sendError);
 
 
 module.exports = router;
