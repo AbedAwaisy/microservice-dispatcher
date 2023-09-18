@@ -13,7 +13,7 @@ async function sendIoTNotification(iotIp, details) {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error(`HTTP Error: ${response.status}    ${serverUrl}`);
+        throw new Error(`HTTP Error: ${response.status}`);
       }
     })
     .then((data) => {

@@ -2,14 +2,11 @@
 const axios = require('axios');
 
   ///data for jira
-  const jiraBaseUrl = 'https://jirapr124.atlassian.net'; // Corrected base URL
-  const username = 'rahmaazaiza2002@gmail.com';
-  const apiToken = 'ATATT3xFfGF0jou8BuyT0H-_GAaurlyFBldCWlRcMboinBQVaZuRC_spu3DICIgagyCsREC4BzGqar8HDERMQyMexYyhKHJJ-hUyKxOwI6d9cpx7FyWlSTrgjl-V0nnQezgqm7dxKvL0QkofgE6eTO1qZK2Du7j_qis3BZvQVauQ5SvXTryinH4=8AF2CF52'; // Replace with your API token
-  const projectKey = 'KAN';
+  
 
-async function sendJira(jiraBaseUrl, username,apiToken,projectKey,des){
+async function sendJira(jiraBaseUrl, jiraEmail,apiToken,projectKey,des){
 
-    const authHeader = 'Basic ' + Buffer.from(username + ':' + apiToken).toString('base64');
+    const authHeader = 'Basic ' + Buffer.from(jiraEmail + ':' + apiToken).toString('base64');
 
     // Get project info
     const apiUrl1 = `${jiraBaseUrl}/rest/api/2/project/${projectKey}`;

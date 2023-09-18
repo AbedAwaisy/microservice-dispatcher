@@ -1,4 +1,9 @@
 const processError = require("../notificationServices/errorProcessor");
+const sendemail = require('../notificationServices/sendEmail');
+const sendsms = require('../notificationServices/sendSMS');
+const sendIoT = require('../notificationServices/sendIoTNotification');
+const sendphonecall = require('../notificationServices/phoneCall');
+const sendjira = require('../notificationServices/jiraNotification');
 
 const errorController = {
   // getErrors: async (req, res) => {
@@ -13,7 +18,6 @@ const errorController = {
   sendError: async (req, res) => {
     try {
       const errorDetails = req.body; // Assuming the error details are in the request body
-      console.log(errorDetails)
       await processError(errorDetails); // Process the error
       res.json({ message: 'Error reported and processed successfully' });
     } catch (error) {
@@ -21,6 +25,63 @@ const errorController = {
       res.status(500).json({ error: 'Error processing error: ' + error.message });    
     }
   },
+
+  sendErroremail: async (req, res) => {
+    try {
+      const errorDetails = req.body;
+      const {to,subject,text } = errorDetails;
+      sendemail(to,subject,text);
+      res.json({ message: 'Error reported and processed successfully' });
+    } catch (error) {
+      console.error('Error processing error:', error);
+      res.status(500).json({ error: 'Error processing error: ' + error.message });    
+    }
+  },
+  sendErrorsms: async (req, res) => {
+    try {
+      const errorDetails = req.body;
+      const { phoneNumber, text } = errorDetails;
+      sendsms(phoneNumber,text);
+      res.json({ message: 'Error reported and processed successfully' });
+    } catch (error) {
+      console.error('Error processing error:', error);
+      res.status(500).json({ error: 'Error processing error: ' + error.message });    
+    }
+  },
+  sendErrorIoT: async (req, res) => {
+    try {
+      const errorDetails = req.body;
+      const { iotIp, ErrorDetails } = errorDetails;
+      sendIoT(iotIp,ErrorDetails);
+      res.json({ message: 'Error reported and processed successfully' });
+    } catch (error) {
+      console.error('Error processing error:', error);
+      res.status(500).json({ error: 'Error processing error: ' + error.message });    
+    }
+  },
+  sendErrorphonecall: async (req, res) => {
+    try {
+      const errorDetails = req.body;
+      const { phoneNumber, text } = errorDetails;
+      sendphonecall(phoneNumber,text);
+      res.json({ message: 'Error reported and processed successfully' });
+    } catch (error) {
+      console.error('Error processing error:', error);
+      res.status(500).json({ error: 'Error processing error: ' + error.message });    
+    }
+  },
+  sendErrorjira: async (req, res) => {
+    try {
+      const errorDetails = req.body;
+      const { jiraBaseUrl,jiraEmail,apiToken,projectKey,text } = errorDetails;
+      sendjira(jiraBaseUrl,jiraEmail,apiToken,projectKey,text);
+      res.json({ message: 'Error reported and processed successfully' });
+    } catch (error) {
+      console.error('Error processing error:', error);
+      res.status(500).json({ error: 'Error processing error: ' + error.message });    
+    }
+  },
+  
 
   // startAutomatedMonitor: () => {
   //   console.log('Started Automated Monitoring');
